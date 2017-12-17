@@ -1,0 +1,69 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'Listado de asignaturas' | translate }}</ion-title>
+
+   <!-- <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>-->
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <form (submit)="searchProduct()">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Buscar</ion-label>
+        <ion-input type="text" [(ngModel)]="search.parameter" name="parameter">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Filtros</ion-label>
+        <ion-select [(ngModel)]="search.filter" multiple="false" name="filter">
+          <ion-option value="all">Todos</ion-option>
+          <ion-option value="order">Orden Alfabetico</ion-option>
+          <ion-option value="name">Nombre</ion-option>
+          <ion-option value="studies">Titulacion</ion-option>
+          <ion-option value="semester">Cuadrimestre</ion-option>
+        </ion-select>
+      </ion-item>
+      <div padding>
+        <button ion-button color="primary" block>BUSCAR</button>
+      </div>
+
+    </ion-list>
+   <!-- <div class="form-group">
+      <label><h5>Filter</h5></label>
+      <select class="form-control"  formControlName="filter">
+        <option value="name">Name</option>
+        <option value="order">Alphabetic order</option>
+        <option value="all">All</option>
+      </select>
+      <label><h5>Word</h5></label>
+      <input type="text" class="form-control" id="name" formControlName="parameter" >
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>-->
+  </form>
+  <ion-list>
+
+    <ion-item-sliding *ngFor="let item of results">
+      <button ion-item (click)="openItem(item)">
+        <ion-avatar item-start>
+          <!--<img [src]="item.profilePic"/>-->
+          <img  src="assets/img/speakers/photo.png" />
+        </ion-avatar>
+        <h2>{{item.name}}</h2>
+        <p>{{item.company}}</p>
+        <ion-note item-end *ngIf="item.avgRate">{{item.avgRate}}</ion-note>
+      </button>
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          {{ 'DELETE_BUTTON' | translate }}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

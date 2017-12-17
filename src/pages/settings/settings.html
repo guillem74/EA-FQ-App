@@ -1,0 +1,66 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'Gestión' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Añadir nueva asignatura
+      </ion-card-title>
+
+      <form (submit)="confirm1()">
+        <ion-list>
+
+          <ion-item>
+            <ion-label fixed>{{ 'Nombre:' | translate }}</ion-label>
+            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label fixed>{{ 'Titulacion:' | translate }}</ion-label>
+            <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label fixed>{{ 'Cuadrimestre:' | translate }}</ion-label>
+            <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button ion-button color="primary" block>{{ 'Añadir' | translate }}</button>
+          </div>
+        </ion-list>
+      </form>
+
+
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Añadir nuevo alumno
+      </ion-card-title>
+      <form (submit)="confirm2()">
+        <ion-list>
+
+          <ion-item>
+            <ion-label fixed>{{ 'Nombre:' | translate }}</ion-label>
+            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+          </ion-item>
+
+          <div padding>
+            <button ion-button color="primary" block>{{ 'Añadir' | translate }}</button>
+          </div>
+        </ion-list>
+      </form>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
