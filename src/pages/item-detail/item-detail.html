@@ -19,28 +19,42 @@
     <ion-item>
       <ion-icon name='ios-school' item-start style="color: #515151"></ion-icon>
       Titulación
-      <ion-badge item-end>{{item.studies}}</ion-badge>
+      <ion-badge item-end color="light">{{item.studies}}</ion-badge>
     </ion-item>
    <ion-item>
      <ion-icon name='ios-calendar' item-start style="color: #515151"></ion-icon>
      Cuadrimestre
-     <ion-badge item-end>{{item.semester}}</ion-badge>
+     <ion-badge item-end color="light">{{item.semester}}</ion-badge>
 
    </ion-item>
 
 
   </ion-card>
-<br>
-  <ion-title>Alumnos cursando la asignatura:</ion-title>
-  <br>
-  <ion-card *ngFor="let student of item.students">
-    <ion-card-content>
-      Nombre: {{student.name}}
-    </ion-card-content>
-    <!--<ion-card-content>
-      Dirección: {{student.address}}
-    </ion-card-content>-->
+  <ion-card>
+    <ion-title>Alumnos cursando la asignatura:</ion-title>
+    <ion-list ion-item *ngFor="let student of item.students">
+      <ion-avatar item-start>
+        <img  src="assets/img/speakers/photo.png" />
+      </ion-avatar>
+        <h2>{{student.name}}</h2>
+    </ion-list>
   </ion-card>
 
+
+<ion-card>
+  <ion-title>Alumnos totales:</ion-title>
+  <ion-list ion-item *ngFor="let item2 of results2">
+    <button item-end ion-button color="secondary">Matricular</button>
+        <ion-avatar item-start>
+          <img  src="assets/img/speakers/photo.png" />
+        </ion-avatar>
+
+        <h2>{{item2.name}}</h2>
+
+
+
+  </ion-list>
+
+</ion-card>
 
 </ion-content>

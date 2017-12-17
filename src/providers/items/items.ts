@@ -27,6 +27,10 @@ export class Items {
   console.log("return")
     return this.items;*/
   }
+  query2(){
+    let seq2=this.api.get('student/all')
+    return seq2;
+  }
 
   add(item: Item) {
   }

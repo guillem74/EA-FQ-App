@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, ModalController, NavController} from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
+
+import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
@@ -11,31 +13,28 @@ import { Items } from '../../providers/providers';
 })
 export class SearchPage {
 
-  currentItems: any = [];
+  currentItems: any = [{}];
+  private results: any=[{}];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public items: Items) { }
 
-  /**
-   * Perform a service for the proper items.
-   *//*
-  getItems(ev) {
-    let val = ev.target.value;
-    if (!val || !val.trim()) {
-      this.currentItems = [];
-      return;
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public items: Items) { }
+
+
+  ionViewDidLoad() {
+  let seq2=this.items.query2();
+
+
+  seq2.subscribe((res: any) => {
+    this.currentItems=res;
+    this.results=this.currentItems;
+    if (res.status == 'success') {
+
+    } else {
+
     }
-    this.currentItems = this.items.query({
-      name: val
-    });
-  }
-
-  /**
-   * Navigate to the detail page for this item.
-   */
-  openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
-      item: item
-    });
+  }, err => {
+    console.error('ERROR', err);
+  });
   }
 
 }
