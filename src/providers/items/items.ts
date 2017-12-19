@@ -31,6 +31,36 @@ export class Items {
     let seq2=this.api.get('student/all')
     return seq2;
   }
+  deletesubject(subject:any){
+    let subjectId=subject._id;
+    let seq = this.api.delete(`subject/`+subjectId).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.code == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+  deletestudent(student:any){
+    let studentId=student._id;
+    let seq = this.api.delete(`student/`+studentId).share();
+
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.code == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
 
   add(item: Item) {
   }

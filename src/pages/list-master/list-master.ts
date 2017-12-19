@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, ToastController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers/providers';
 import {MainPage} from "../pages";
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import { AlertController, App } from 'ionic-angular';
 import 'rxjs/add/operator/map';
+import {FirstRunPage} from "../pages";
 
 @IonicPage()
 @Component({
@@ -13,6 +15,7 @@ import 'rxjs/add/operator/map';
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage {
+  rootPage=FirstRunPage;
   currentItems: any=[{}];
   searchForm: FormGroup;
   private results: any=[{}];
@@ -21,7 +24,8 @@ export class ListMasterPage {
     parameter:''
   };
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, private fb: FormBuilder) {
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, private fb: FormBuilder,
+              private alertCtrl: AlertController, public toastCtrl: ToastController, private app:App) {
     this.searchForm = fb.group({
       'filter':'',
       'parameter':''
@@ -111,7 +115,44 @@ export class ListMasterPage {
    * Delete an item from the list of items.
    */
   deleteItem(item) {
-    this.items.delete(item);
+    let alert = this.alertCtrl.create({
+      title: 'Borrar asignatura',
+      message: '¿Estás seguro que deseas borrar la asignatura?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('La asignatura no ha sido borrada');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+              this.items.deletesubject(item).subscribe((resp) => {
+                let toast = this.toastCtrl.create({
+                  message: "Asignatura borrada",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+                this.app.getRootNav().setRoot(this.rootPage)
+
+              }, (err) => {
+                // Unable to log in
+                let toast = this.toastCtrl.create({
+                  message: "Error al borrar la asignatura",
+                  duration: 3000,
+                  position: 'top'
+                });
+                toast.present();
+              });
+          }
+
+        }
+      ]
+    });
+    alert.present();
   }
 
   /**
