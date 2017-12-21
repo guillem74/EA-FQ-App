@@ -79,11 +79,11 @@ export class User {
     return seq;
   }
 
-  update(accountInfo:any, user:any){
-    let userId=user._id;
-    let seq = this.api.post(`users/update/`+userId, accountInfo).share();
+  addsubject(subject:any){
+    let seq = this.api.post(`subject/add/`, subject).share();
 
     seq.subscribe((res: any) => {
+
       // If the API returned a successful response, mark the user as logged in
       if (res.code == 'success') {
         console.log("ok");

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'Gestión' | translate }}</ion-title>
+    <ion-title>{{ 'Gestión de administrador' | translate }}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,21 +18,21 @@
         <ion-list>
 
           <ion-item>
-            <ion-label fixed>{{ 'Nombre:' | translate }}</ion-label>
-            <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+            <ion-label fixed>Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label fixed>{{ 'Titulacion:' | translate }}</ion-label>
-            <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+            <ion-label fixed>Titulación</ion-label>
+            <ion-input type="text" [(ngModel)]="account.studies" name="studies"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label fixed>{{ 'Cuadrimestre:' | translate }}</ion-label>
-            <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+            <ion-label fixed>Cuadrimestre</ion-label>
+            <ion-input type="text" [(ngModel)]="account.semester" name="semester"></ion-input>
           </ion-item>
 
           <div padding>
-            <button ion-button color="primary" block>{{ 'Añadir' | translate }}</button>
+            <button ion-button color="primary" block>Añadir</button>
           </div>
         </ion-list>
       </form>

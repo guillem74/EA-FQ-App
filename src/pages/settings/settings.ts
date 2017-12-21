@@ -20,9 +20,10 @@ import {FirstRunPage} from "../pages";
 export class SettingsPage {
   rootPage=FirstRunPage;
 
-  account: { email: string, password: string } = {
-    email: '',
-    password: ''
+  account: { name: string, studies: string, semester: string } = {
+    name: '',
+    studies: '',
+    semester: ''
   };
   // Our local settings object
   options: any;
@@ -58,29 +59,24 @@ export class SettingsPage {
 
   confirm1() {
     let alert = this.alertCtrl.create({
-      title: 'Confirmar cambios',
-      message: '¿Estás seguro que quieres modificar tu cuenta?',
+      title: 'Añadir asignatura',
+      message: '¿Deseas añadir una nueva asignatura?',
       buttons: [
         {
           text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            console.log('No se han guardado tus cambios');
+            console.log('No se ha añadido ninguna asignatura');
           }
         },
         {
           text: 'Aceptar',
           handler: () => {
             let user:any;
-            this.storage.get('user').then((resp) => {
-              user=resp;
-              console.log(user)
-              this.user.update(this.account,user).subscribe((resp) => {
-                let usr:any;
-                usr=resp;
-                this.storage.set('user', usr);
+              this.user.addsubject(this.account).subscribe((resp) => {
+                this.app.getRootNav().setRoot(this.rootPage);
                 let toast = this.toastCtrl.create({
-                  message: "Usuario actualizado",
+                  message: "Asignatura añadida",
                   duration: 3000,
                   position: 'top'
                 });
@@ -88,45 +84,20 @@ export class SettingsPage {
               }, (err) => {
                 // Unable to log in
                 let toast = this.toastCtrl.create({
-                  message: "Error al actualizar",
+                  message: "Error al añadir asignatura",
                   duration: 3000,
                   position: 'top'
                 });
                 toast.present();
               });
-            });
+
           }
         }
       ]
     });
     alert.present();
   }
- /* doUpdate(){
-    let user:any;
-    this.storage.get('user').then((resp) => {
-      user=resp;
-      console.log(user)
-      this.user.update(this.account,user).subscribe((resp) => {
-        let usr:any;
-        usr=resp;
-        this.storage.set('user', usr);
-        let toast = this.toastCtrl.create({
-          message: "Usuario actualizado",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      }, (err) => {
-        // Unable to log in
-        let toast = this.toastCtrl.create({
-          message: "Error al actualizar",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      });
-    });
-  }*/
+
 
   confirm2() {
     let alert = this.alertCtrl.create({
@@ -177,28 +148,5 @@ export class SettingsPage {
   cerrarsesion(){
     this.app.getRootNav().setRoot(this.rootPage)
   }
-  /*
-  doDelete(){
-    let user:any;
-    this.storage.get('user').then((resp) => {
-      user=resp;
-      console.log(user);
-      this.user.deleteuser(user).subscribe((resp) => {
-        let toast = this.toastCtrl.create({
-          message: "Usuario borrado",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      }, (err) => {
-        // Unable to log in
-        let toast = this.toastCtrl.create({
-          message: "Error al borrar el usuario",
-          duration: 3000,
-          position: 'top'
-        });
-        toast.present();
-      });
-    });
-  }*/
+
 }
