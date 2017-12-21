@@ -62,8 +62,7 @@ export class Items {
     return seq;
   }
 
-  add(item: Item) {
-  }
+
 
   delete(item: Item) {
   }

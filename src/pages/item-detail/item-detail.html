@@ -8,6 +8,8 @@
 
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
   <ion-card>
   <img  src="assets/img/speakers/eetac.png" align="middle" />
   <ion-card-content>
@@ -27,34 +29,34 @@
      <ion-badge item-end color="light">{{item.semester}}</ion-badge>
 
    </ion-item>
-
-
   </ion-card>
+      </ion-row>
+
+    <ion-row>
+      <ion-title>Estudiantes</ion-title>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
   <ion-card>
-    <ion-title>Alumnos cursando la asignatura:</ion-title>
+    <ion-title>Cursando:</ion-title>
     <ion-list ion-item *ngFor="let student of item.students">
-      <ion-avatar item-start>
-        <img  src="assets/img/speakers/photo.png" />
-      </ion-avatar>
+      <ion-icon item-end name="ios-trash" color="danger" (click)="delStudenttoSubject(item, student)"></ion-icon>
+
         <h2>{{student.name}}</h2>
     </ion-list>
   </ion-card>
-
-
+      </ion-col>
+        <ion-col col-6>
 <ion-card>
-  <ion-title>Alumnos totales:</ion-title>
+  <ion-title>Totales:</ion-title>
   <ion-list ion-item *ngFor="let item2 of results2">
-    <button item-end ion-button color="secondary">Matricular</button>
-        <ion-avatar item-start>
-          <img  src="assets/img/speakers/photo.png" />
-        </ion-avatar>
+    <ion-icon item-end name="ios-add-circle" color="secondary" (click)="addStudenttoSubject(item, item2)"></ion-icon>
 
         <h2>{{item2.name}}</h2>
-
-
-
   </ion-list>
-
 </ion-card>
+        </ion-col>
 
+    </ion-row>
+    </ion-grid>
 </ion-content>

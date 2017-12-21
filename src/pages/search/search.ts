@@ -54,14 +54,15 @@ export class SearchPage {
         {
           text: 'Aceptar',
           handler: () => {
-            this.items.deletestudent(item).subscribe((resp) => {
+            this.items.deletestudent(item).subscribe((resp: any) => {
+              var index = this.currentItems.indexOf(item);
+              this.currentItems.splice(index, 1);
               let toast = this.toastCtrl.create({
                 message: "Alumno borrado",
                 duration: 3000,
                 position: 'top'
               });
               toast.present();
-              this.app.getRootNav().setRoot(this.rootPage)
 
             }, (err) => {
               // Unable to log in

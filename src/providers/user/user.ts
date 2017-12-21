@@ -5,25 +5,6 @@ import { Injectable } from '@angular/core';
 
 import { Api } from '../api/api';
 
-/**
- * Most apps have the concept of a User. This is a simple provider
- * with stubs for login/signup/etc.
- *
- * This User provider makes calls to our API at the `login` and `signup` endpoints.
- *
- * By default, it expects `login` and `signup` to return a JSON object of the shape:
- *
- * ```json
- * {
- *   status: 'success',
- *   user: {
- *     // User fields your app needs, like "id", "name", "email", etc.
- *   }
- * }Ø
- * ```
- *
- * If the `status` field is not `success`, then an error is detected and returned.
- */
 @Injectable()
 export class User {
   _user: any;
@@ -34,6 +15,36 @@ export class User {
    * Send a POST request to our login endpoint with the data
    * the user entered on the form.
    */
+  addto(idsub:any, idstu:any) {
+    let body={"students": idstu};
+    let seq = this.api.post(`subject/student/${idsub}`, body).share();
+  console.log(seq);
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+    return seq;
+
+  }
+
+  delto(idsub:any, idstu:any) {
+    let seq = this.api.delete(`subject/student/${idsub}/${idstu}`).share();
+    seq.subscribe((res: any) => {
+      // If the API returned a successful response, mark the user as logged in
+      if (res.status == 'success') {
+        console.log("ok");
+      }
+    }, err => {
+      console.error('ERROR', err);
+    });
+    return seq;
+
+  }
+
   login(accountInfo: any) {
     let seq = this.api.post('users/login', accountInfo).share();
 
