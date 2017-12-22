@@ -18,9 +18,8 @@ export class ListMasterPage {
   rootPage=FirstRunPage;
   currentItems: any=[{}];
   searchForm: FormGroup;
-  private results: any=[{}];
   subjects: any=[{}];
-  results2: any=[{}];
+  results: any=[{}];
   search: {filter: string, parameter: string}={
     filter: '',
     parameter:''
@@ -48,11 +47,11 @@ export class ListMasterPage {
 
     seq.subscribe((res: any) => {
       this.currentItems=res;
-      this.results2=this.currentItems;
+      this.results=this.currentItems;
       for (let subject of this.currentItems){
         subject.numStudents=subject.students.length;
       }
-      this.results2=this.subjects;
+      this.results=this.subjects;
       if (res.status == 'success') {
 
       } else {
