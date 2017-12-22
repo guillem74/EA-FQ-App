@@ -55,8 +55,8 @@
           <img  src="assets/img/speakers/photo.png" />
         </ion-avatar>
         <h2>{{item.name}}</h2>
-        <h2>{{item.numStudents}}</h2>
-        <ion-note item-end *ngIf="item.avgRate">{{item.avgRate}}</ion-note>
+
+        <ion-note item-end *ngIf="item.numStudents">{{item.numStudents}}</ion-note>
       </button>
       <ion-item-options>
         <button ion-button color="danger" (click)="deleteItem(item)">

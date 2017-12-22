@@ -18,6 +18,7 @@ export class ListMasterPage {
   rootPage=FirstRunPage;
   currentItems: any=[{}];
   searchForm: FormGroup;
+  //private results: any=[{}];
   subjects: any=[{}];
   results: any=[{}];
   search: {filter: string, parameter: string}={
@@ -51,7 +52,7 @@ export class ListMasterPage {
       for (let subject of this.currentItems){
         subject.numStudents=subject.students.length;
       }
-      this.results=this.subjects;
+      this.results=this.currentItems
       if (res.status == 'success') {
 
       } else {
